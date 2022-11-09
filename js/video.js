@@ -9,6 +9,7 @@ window.addEventListener("load", function() {
 function playVid() {
 	video.play()
 	console.log("Play Video")
+	document.getElementById("volume").innerHTML = video.volume * 100 + "%"
 }
 document.querySelector("#play").addEventListener("click", playVid)
 
@@ -18,19 +19,14 @@ function pauseVid() {
 }
 document.querySelector("#pause").addEventListener("click", pauseVid)
 
-// ask about how to get it to loop and decrement by 10%
 function slowerVid() {
-	video.playbackRate = 0.9
+	video.playbackRate *= 0.9
 	console.log(video.playbackRate)
-	// for (var i = 0; i < 0.9; i--) {
-	// 	video.playbackRate -= video.playbackRate - (video.playbackRate * 0.1)
-		
-	// } 
 }
 document.querySelector("#slower").addEventListener("click", slowerVid)
 
 function fasterVid() {
-	video.playbackRate = 1.1
+	video.playbackRate /= 0.9
 	console.log(video.playbackRate)
 }
 document.querySelector("#faster").addEventListener("click", fasterVid)
@@ -41,23 +37,32 @@ function skipVid() {
 }
 document.querySelector("#skip").addEventListener("click", skipVid)
 
-// ask how to change button text
 var btn = document.querySelector("#mute")
 function muteVideo() {
-	if (video.muted === false) {
+	if (video.muted == false) {
 		video.muted = true
-		btn.textContent = "Mute"
+		btn.innerHTML = "Unmute"
 	}
 	else {
 		video.muted = false
-		btn.textContent = "Mute"
+		btn.innerHTML = "Mute"
 	}
 }
 document.querySelector("#mute").addEventListener("click", muteVideo)
 
-function volumeSlider () {
-	console.log("Volume adjusted")
+slider = document.getElementById("slider")
+function volumeSlider() {
+	video.volume = slider.value/100
+	document.getElementById("volume").innerHTML = video.volume * 100 + "%"
 }
 document.querySelector("#slider").addEventListener("click", volumeSlider)
 
+function oldSchool() {
+	video.classList.add("oldSchool")
+}
+document.querySelector("#vintage").addEventListener("click", oldSchool)
 
+function originalStyle() {
+	video.classList.remove("oldSchool")
+}
+document.querySelector("#orig").addEventListener("click", originalStyle)
